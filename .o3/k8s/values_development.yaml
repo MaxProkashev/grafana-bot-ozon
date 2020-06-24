@@ -1,0 +1,5 @@
+# Place dev-cluster overrides here
+deploy:
+  env:
+    - name: GRAFANA_BOT_LOG_LEVEL
+      value: INFO

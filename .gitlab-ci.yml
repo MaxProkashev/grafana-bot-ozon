@@ -1,0 +1,82 @@
+# https://confluence.ozon.ru/display/ITDOC/Gitlab:+Common+pipeline
+include:
+  - project: pub/ci
+    ref: 0.0.5
+    file: .common.gitlab-ci.yml
+  - project: platform/lint
+    ref: v0.7
+    file: go1.12.gitlab-ci.yml
+
+variables:
+  # свой namespace, по умолчанию берется $CI_PROJECT_NAMESPACE
+  K8S_NAMESPACE: $CI_PROJECT_NAMESPACE
+  # если не указать будет использоваться $CI_PROJECT_PATH_SLUG (формат group-subgroup-project, например cas-roles)
+  SERVICE_NAME: grafana-bot
+  # путь до файлов values
+  HELM_VALUES_FOLDER: .o3/k8s
+  # проект в JIRA в котором будут заводится релизы
+  # JIRA_PROJ: ""
+  # префикс для релиза в jira
+  # JIRA_VERSION_PREFIX: main/
+  # если если используете свой, укажите относительный путь, иначе указывать не нужно
+  # HELM_CHART:
+  # если не в корне, расположение файла для сборки docker образа
+  DOCKERFILE_PATH: .o3/build/package/Dockerfile
+  # если есть папка с миграциями
+  # MIGRATION_FOLDER: ./migrations
+  # каналы куда отправлять оповещения о деплоях, через пробел
+  # SLACK_DEPLOY_CHANNELS:
+  # Uncomment DEPLOY_CONFIG to enable etcd config updater on deploy stage.
+  # DEPLOY_CONFIG: "yes"
+
+build:
+  image: gitlab-registry.ozon.ru/deploy/images/go-runner:1.13.3
+  stage: build
+  cache:
+    key: "go-modules-cache"
+    paths:
+      - .cache/go/pkg/mod/cache/download
+      - .cache/gocache/*/*
+      - .cache/gocache/trim.txt
+  before_script:
+    - pwd
+    - ls -la
+    - git config --global credential.helper store && echo "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ozon.ru" >> ~/.git-credentials
+    - export GOPATH=${CI_PROJECT_DIR}/.cache/go
+    - export GOCACHE=${CI_PROJECT_DIR}/.cache/gocache
+    - export CC=gcc
+  script:
+    - make build
+  after_script:
+    - ls -al bin
+  except:
+    - tags
+  artifacts:
+    paths:
+      - bin/
+    expire_in: 1 day
+
+create image:
+  dependencies:
+    - build
+
+test:
+  image: gitlab-registry.ozon.ru/deploy/images/go-runner:1.13.3
+  stage: tests
+  cache:
+    key: "go-modules-cache"
+    paths:
+      - .cache/go/pkg/mod/cache/download
+      - .cache/gocache/*/*
+      - .cache/gocache/trim.txt
+  before_script:
+    - pwd
+    - ls -la
+    - git config --global credential.helper store && echo "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ozon.ru" >> ~/.git-credentials
+    - export GOPATH=${CI_PROJECT_DIR}/.cache/go
+    - export GOCACHE=${CI_PROJECT_DIR}/.cache/gocache
+    - export CC=gcc
+  script:
+    - make test
+  except:
+    - tags

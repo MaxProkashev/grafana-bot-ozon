@@ -1,0 +1,53 @@
+token: "xoxb-3271663252-863446272289-byVXMLkXGKBH4AsmaftHO0bS"
+
+imageWidth: "1500"
+imageHeight: "500"
+overloadBaseURL: "http://overload-api.qa.infra-ts.s.o3.ru:80/collections?"
+jobInfoURL: "https://overload.o3.ru/api/job?id="
+overloadBoard: "https://grafana.o3.ru/render/d-solo/gM7Iqapik/tank-universal-dashboard?orgId=1&theme=light&panelId=4&from="
+
+imageURL1: "http://grafana.o3.ru/render/d-solo/"
+imageURL2: "?orgId=1&theme=light&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service="
+
+viewURL1: "http://grafana.o3.ru/d/"
+viewURL2: "?orgId=1&theme=light&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service="
+
+firstCat: "https://i.ibb.co/mBw0R1j/hqdefault.jpg"
+nameScreen1: "Quantiles"
+nameScreen2: "image"
+
+
+reports:
+  -
+    Env: "prod"
+    Project: "site"
+    Name: "api.ozon.ru imbalance"
+    SlackChannel: "CNCJGDES2"
+    Panels:
+      -
+        Title: "composer-api / Response time grades"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=composer-api&var-external_service=All&var-namespace=bx&var-k8s_service=composer-api-4227&var-version=stable&var-interval=&from=1570408918000&to=1570410730000&panelId=45&fullscreen"
+      -
+        Title: "composer-api / Response time (0.9q, 0.99q) + RPS"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=composer-api&var-external_service=All&var-namespace=bx&var-k8s_service=composer-api-4622&var-version=release-20191003-1&var-interval=%24__auto_interval_interval&panelId=276&fullscreen"
+      -
+        Title: "composer-api / Response codes ratio (ok, client_error, error)"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=composer-api&var-external_service=All&var-namespace=bx&var-k8s_service=composer-api-4622&var-version=release-20191003-1&var-interval=%24__auto_interval_interval&panelId=44&fullscreen"
+      -
+        Title: "composer-api / Response time - success (0.9q)"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=composer-api&var-external_service=All&var-namespace=bx&var-k8s_service=composer-api-4622&var-version=release-20191003-1&var-interval=%24__auto_interval_interval&fullscreen&panelId=3794"
+      -
+        Title: "composer-api / Response codes count (client_error, error) WITHOUT ok"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=composer-api&var-external_service=All&var-namespace=bx&var-k8s_service=composer-api-4622&var-version=release-20191003-1&var-interval=%24__auto_interval_interval&fullscreen&panelId=919"
+      -
+        Title: "frontend-ozon-ru / Response time grades"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=frontend-ozon-ru&var-external_service=All&var-namespace=bx&var-k8s_service=frontend-ozon-ru-50381&var-version=1.0.0&var-interval=%24__auto_interval_interval&panelId=45&fullscreen"
+      -
+        Title: "frontend-ozon-ru / Response time (0.9q, 0.99q) + RPS"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=frontend-ozon-ru&var-external_service=All&var-namespace=bx&var-k8s_service=frontend-ozon-ru-50381&var-version=1.0.0&var-interval=%24__auto_interval_interval&panelId=276&fullscreen"
+      -
+        Title: "goauth / Response time grades"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=goauth&var-external_service=All&var-namespace=bx&var-k8s_service=goauth&var-version=stable&var-interval=%24__auto_interval_interval&panelId=45&fullscreen"
+      -
+        Title: "goauth / Response time (0.9q, 0.99q) + RPS"
+        URL: "http://grafana.o3.ru/d/BtgL8fHmz/service-overview?orgId=1&refresh=1m&from=1570408918000&to=1570410730000&var-env=prod&var-datasource=%5BPROD%5D%20K8S%20Prometheus&var-service=goauth&var-external_service=All&var-namespace=bx&var-k8s_service=goauth&var-version=stable&var-interval=%24__auto_interval_interval&panelId=276&fullscreen"

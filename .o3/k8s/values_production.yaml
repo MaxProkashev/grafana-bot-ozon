@@ -1,0 +1,7 @@
+# Place production overrides here
+replicaCount: 2
+
+deploy:
+  env:
+    - name: GRAFANA_BOT_LOG_LEVEL
+      value: WARN

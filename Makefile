@@ -1,0 +1,1 @@
+include scratch.mk
